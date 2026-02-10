@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/createPayment.js": {
+      "maxDuration": 10
+    }
+  }
+}
