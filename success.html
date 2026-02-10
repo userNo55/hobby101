@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Успешная оплата | Хобби 101</title>
+    <script>
+        // Извлекаем параметры из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentId = urlParams.get('payment_id') || 'unknown';
+        const userId = urlParams.get('userId') || 'unknown';
+        
+        // Ссылка для открытия приложения
+        const appDeepLink = `hobby101://home?payment=success&userId=${encodeURIComponent(userId)}&paymentId=${paymentId}`;
+        
+        // Ссылка для загрузки приложения, если deeplink не сработал
+        const fallbackStoreLink = 'https://expo.dev/...'; // Или ваш Google Play/App Store
+        
+        function openApp() {
+            // Пытаемся открыть приложение
+            window.location.href = appDeepLink;
+            
+            // Если через 2 секунды приложение не открылось, показываем кнопку
+            setTimeout(function() {
+                document.getElementById('openAppBtn').style.display = 'block';
+                document.getElementById('appStoreLink').href = fallbackStoreLink;
+            }, 2000);
+        }
+        
+        // Запускаем при загрузке страницы
+        window.onload = openApp;
+    </script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFC8DD 0%, #FFF0F3 100%);
+            color: #590D22;
+            text-align: center;
+            padding: 50px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #590D22;
+        }
+        h1 {
+            color: #590D22;
+            margin-bottom: 20px;
+        }
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        .details {
+            background: #FFF0F3;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .btn {
+            display: inline-block;
+            background: #FF595E;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .btn:hover {
+            background: #E5484D;
+        }
+        #openAppBtn {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h1>Оплата прошла успешно!</h1>
+        <p>Доступ ко всем проектам "Хобби 101" разблокирован.</p>
+        
+        <div class="details">
+            <p><strong>ID платежа:</strong> <span id="paymentIdDisplay">Загрузка...</span></p>
+            <p><strong>Статус:</strong> Оплачен</p>
+        </div>
+        
+        <p>Приложение должно открыться автоматически...</p>
+        
+        <button id="openAppBtn" class="btn" onclick="openApp()">
+            📱 Открыть приложение
+        </button>
+        
+        <p style="margin-top: 30px; font-size: 14px; color: #888;">
+            Если приложение не открывается, <a href="#" id="appStoreLink">установите его из магазина</a>
+        </p>
+    </div>
+    
+    <script>
+        // Отображаем paymentId
+        document.getElementById('paymentIdDisplay').textContent = paymentId;
+    </script>
+</body>
+</html>
