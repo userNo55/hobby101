@@ -1,7 +1,14 @@
 {
-  "functions": {
-    "api/createPayment.js": {
-      "maxDuration": 10
+  "builds": [
+    {
+      "src": "api/createPayment.js",
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/createPayment"
+    }
+  ]
 }
