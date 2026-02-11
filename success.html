@@ -1,117 +1,334 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Успешная оплата | Хобби 101</title>
-    <script>
-        // Извлекаем параметры из URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const paymentId = urlParams.get('payment_id') || 'unknown';
-        const userId = urlParams.get('userId') || 'unknown';
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>✅ Оплата успешна | Хобби 101</title>
+    <style>
+        /* Пиксельный стиль как в приложении */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
-        // Ссылка для открытия приложения
-        const appDeepLink = `hobby101://home?payment=success&userId=${encodeURIComponent(userId)}&paymentId=${paymentId}`;
-        
-        // Ссылка для загрузки приложения, если deeplink не сработал
-        const fallbackStoreLink = 'https://expo.dev/...'; // Или ваш Google Play/App Store
-        
-        function openApp() {
-            // Пытаемся открыть приложение
-            window.location.href = appDeepLink;
-            
-            // Если через 2 секунды приложение не открылось, показываем кнопку
-            setTimeout(function() {
-                document.getElementById('openAppBtn').style.display = 'block';
-                document.getElementById('appStoreLink').href = fallbackStoreLink;
-            }, 2000);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
         }
         
-        // Запускаем при загрузке страницы
-        window.onload = openApp;
-    </script>
-    <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #FFC8DD 0%, #FFF0F3 100%);
+            font-family: 'Press Start 2P', 'Courier New', monospace;
+            background-color: #FFF0F3;
             color: #590D22;
-            text-align: center;
-            padding: 50px 20px;
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            padding: 16px;
+            margin: 0;
+            /* Пиксельный фон */
+            background-image: 
+                linear-gradient(#FFC8DD 1px, transparent 1px),
+                linear-gradient(90deg, #FFC8DD 1px, transparent 1px);
+            background-size: 20px 20px;
         }
+        
         .container {
-            max-width: 500px;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 480px;
+            width: 100%;
+            background-color: #FFFFFF;
+            border: 6px solid #590D22;
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: 12px 12px 0 #590D22;
+            position: relative;
+        }
+        
+        /* Пиксельный уголок */
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: -12px;
+            width: 24px;
+            height: 24px;
+            background-color: #FFC8DD;
             border: 3px solid #590D22;
+            transform: rotate(45deg);
         }
-        h1 {
-            color: #590D22;
-            margin-bottom: 20px;
-        }
+        
         .success-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
+            font-size: 64px;
+            text-align: center;
+            margin-bottom: 16px;
+            animation: bounce 0.5s ease;
         }
-        .details {
-            background: #FFF0F3;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: left;
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-        .btn {
-            display: inline-block;
-            background: #FF595E;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 10px;
-            border: none;
-            cursor: pointer;
+        
+        h1 {
+            font-family: 'Press Start 2P', monospace;
             font-size: 18px;
+            color: #590D22;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-transform: uppercase;
+            word-break: break-word;
         }
-        .btn:hover {
-            background: #E5484D;
+        
+        .pixel-border {
+            border: 4px solid #FFAFCC;
+            padding: 20px;
+            margin: 24px 0;
+            background-color: #FFF0F3;
+            position: relative;
         }
-        #openAppBtn {
+        
+        .pixel-border::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px dashed #590D22;
+            pointer-events: none;
+        }
+        
+        .benefit-list {
+            list-style: none;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #590D22;
+        }
+        
+        .benefit-item span:first-child {
+            font-size: 16px;
+        }
+        
+        .payment-details {
+            background-color: #FFC8DD;
+            border: 4px solid #590D22;
+            padding: 16px;
+            margin: 24px 0;
+            font-size: 12px;
+        }
+        
+        .payment-details p {
+            margin: 8px 0;
+            word-break: break-all;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px 20px;
+            background-color: #FF595E;
+            border: 4px solid #590D22;
+            color: white;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 16px 0;
+            transition: all 0.1s ease;
+            box-shadow: 6px 6px 0 #590D22;
+            letter-spacing: 2px;
+        }
+        
+        .btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 2px 2px 0 #590D22;
+        }
+        
+        .btn.secondary {
+            background-color: #CDB4DB;
+            color: #590D22;
+            font-size: 12px;
+        }
+        
+        .store-link {
+            color: #590D22;
+            text-decoration: none;
+            border-bottom: 2px dashed #590D22;
+            padding-bottom: 2px;
+        }
+        
+        .auto-open-message {
+            background-color: #A2D2FF;
+            border: 4px solid #590D22;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 12px;
+            color: #590D22;
+            text-align: center;
+        }
+        
+        .hidden {
             display: none;
-            margin-top: 20px;
+        }
+        
+        .footer-text {
+            font-size: 10px;
+            color: #590D22;
+            text-align: center;
+            margin-top: 24px;
+            opacity: 0.8;
+        }
+        
+        /* Адаптация для очень маленьких экранов */
+        @media (max-width: 380px) {
+            .container {
+                padding: 20px 16px;
+            }
+            
+            h1 {
+                font-size: 16px;
+            }
+            
+            .btn {
+                font-size: 12px;
+                padding: 14px 16px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="success-icon">✅</div>
-        <h1>Оплата прошла успешно!</h1>
-        <p>Доступ ко всем проектам "Хобби 101" разблокирован.</p>
         
-        <div class="details">
-            <p><strong>ID платежа:</strong> <span id="paymentIdDisplay">Загрузка...</span></p>
-            <p><strong>Статус:</strong> Оплачен</p>
+        <h1>ОПЛАТА УСПЕШНА! 🎮</h1>
+        
+        <div class="pixel-border">
+            <ul class="benefit-list">
+                <li class="benefit-item">
+                    <span>🎯</span>
+                    <span>Все проекты разблокированы навсегда</span>
+                </li>
+                <li class="benefit-item">
+                    <span>📱</span>
+                    <span>Работает без интернета</span>
+                </li>
+                <li class="benefit-item">
+                    <span>🆕</span>
+                    <span>Новые проекты — бесплатно</span>
+                </li>
+            </ul>
         </div>
         
-        <p>Приложение должно открыться автоматически...</p>
+        <div class="payment-details">
+            <p style="margin-bottom: 8px;"><strong>🧾 ID платежа:</strong></p>
+            <p style="background: white; padding: 8px; border: 2px solid #590D22;" id="paymentIdDisplay">Загрузка...</p>
+        </div>
         
-        <button id="openAppBtn" class="btn" onclick="openApp()">
-            📱 Открыть приложение
+        <div id="autoOpenMessage" class="auto-open-message">
+            ⏳ Пытаемся открыть приложение...
+        </div>
+        
+        <button id="openAppBtn" class="btn hidden" onclick="openApp()">
+            📲 ОТКРЫТЬ ПРИЛОЖЕНИЕ
         </button>
         
-        <p style="margin-top: 30px; font-size: 14px; color: #888;">
-            Если приложение не открывается, <a href="#" id="appStoreLink">установите его из магазина</a>
+        <button id="copyLinkBtn" class="btn secondary" onclick="copyDeepLink()">
+            📋 КОПИРОВАТЬ ССЫЛКУ
+        </button>
+        
+        <p style="font-size: 11px; margin: 16px 0 8px; color: #590D22;">
+            ⚡ Не открывается автоматически?
+        </p>
+        
+        <p style="font-size: 11px; line-height: 1.8; color: #590D22;">
+            • На Android: разрешите переход по ссылке<br>
+            • На iOS: нажмите "Открыть" в Safari<br>
+            • Или скопируйте ссылку кнопкой выше
+        </p>
+        
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 2px dashed #FFC8DD;">
+            <p style="font-size: 10px; color: #590D22;">
+                🔗 Ссылка для возврата:
+            </p>
+            <p id="deeplinkDisplay" style="font-size: 9px; word-break: break-all; background: #FFF0F3; padding: 8px; margin-top: 8px; border: 2px solid #FFC8DD;">
+                hobby101://...
+            </p>
+        </div>
+        
+        <p class="footer-text">
+            🎮 Хобби 101 — Освой всё!
         </p>
     </div>
     
     <script>
-        // Отображаем paymentId
+        // Извлекаем параметры из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentId = urlParams.get('paymentId') || urlParams.get('payment_id') || 'unknown';
+        const userId = urlParams.get('userId') || 'unknown';
+        
+        // Deeplink
+        const appDeepLink = `hobby101://home?payment=success&userId=${encodeURIComponent(userId)}&paymentId=${encodeURIComponent(paymentId)}`;
+        const fallbackStoreLink = 'https://expo.dev/...'; // Замените на ваш магазин
+        
+        // Отображаем ID платежа
         document.getElementById('paymentIdDisplay').textContent = paymentId;
+        
+        // Отображаем deeplink
+        document.getElementById('deeplinkDisplay').textContent = appDeepLink;
+        
+        // Функция открытия приложения
+        function openApp() {
+            console.log('🔗 Пытаемся открыть:', appDeepLink);
+            
+            // Пытаемся открыть приложение
+            window.location.href = appDeepLink;
+            
+            // Показываем кнопку "Открыть приложение" через 2.5 секунды
+            setTimeout(function() {
+                const btn = document.getElementById('openAppBtn');
+                const msg = document.getElementById('autoOpenMessage');
+                
+                btn.classList.remove('hidden');
+                msg.innerHTML = '⌛ Не удалось открыть автоматически? Нажмите кнопку ниже';
+                msg.style.backgroundColor = '#FFB3B3';
+            }, 2500);
+        }
+        
+        // Функция копирования deeplink
+        function copyDeepLink() {
+            navigator.clipboard.writeText(appDeepLink).then(function() {
+                const btn = document.getElementById('copyLinkBtn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ СКОПИРОВАНО!';
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                }, 2000);
+            }).catch(function(err) {
+                alert('Не удалось скопировать ссылку. Вот она:\n' + appDeepLink);
+            });
+        }
+        
+        // Автоматически пробуем открыть приложение
+        window.onload = function() {
+            // Показываем ID платежа
+            console.log('✅ Страница успешной оплаты загружена');
+            console.log('📦 Payment ID:', paymentId);
+            console.log('👤 User ID:', userId);
+            console.log('🔗 Deeplink:', appDeepLink);
+            
+            // Пробуем открыть приложение через 0.5 секунды
+            setTimeout(openApp, 500);
+        };
     </script>
 </body>
 </html>
